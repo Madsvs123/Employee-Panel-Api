@@ -4,7 +4,7 @@ import Job from '../models/Jop.js'
 export const getEmployees = async(req, res) => {
     try {
         const employees = await Employee.find()
-        const jops = await Job.find()
+        const jobs = await Job.find()
 
         res.json({employees, employees})
     } catch (err) {
