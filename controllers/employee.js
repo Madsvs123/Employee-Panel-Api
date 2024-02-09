@@ -6,7 +6,7 @@ export const getEmployees = async(req, res) => {
         const employees = await Employee.find()
         const jobs = await Job.find()
 
-        res.json({employees, employees})
+        res.json({employees, jobs})
     } catch (err) {
         res.status(500).send({error : err.message})
     }
