@@ -18,7 +18,7 @@ export const addUser = async (req, res) => {
         const {username, password} = req.body;
         const userExist = await User.findOne({username})
         if(userExist) {
-            return res.status(400).message({message : 'User already exists'})
+            return res.status(400).json({message : 'User already exists'})
         }
 
         const salt = await bcrypt.genSalt()

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Mongoose } from "mongoose";
 
 const employeeSchema = new mongoose.Schema({
     employeeCode: {
@@ -20,8 +20,8 @@ const employeeSchema = new mongoose.Schema({
       required: true
     },
     jobCode: {
-      type: String,
-      required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'jop'
     }
   });
 

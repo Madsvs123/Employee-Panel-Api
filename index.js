@@ -7,9 +7,10 @@ import dotenv from 'dotenv'
 import { fileURLToPath } from 'url'
 import path from 'path'
 import connectDB from './config/database.js'
-import EmployeeRoute from './routes/employee.js'
 import authRoute from './routes/auth.js'
 import userRoute from './routes/user.js'
+import EmployeeRoute from './routes/employee.js'
+import JopRoute from './routes/jop.js'
 import { vertifyToken } from './middleware/vertifyToken.js'
 
 
@@ -33,6 +34,7 @@ app.use(cors())
 app.use('/auth', authRoute)
 app.use('/user', userRoute)
 app.use('/employee', EmployeeRoute)
+app.use('/jop', JopRoute)
 
 connectDB()
 app.listen(PORT, (err) => {

@@ -1,9 +1,12 @@
 import Employee from '../models/Employee.js'
+import Job from '../models/Jop.js'
 
 export const getEmployees = async(req, res) => {
     try {
         const Employees = await Employee.find()
-        res.json(Employees)
+        const Jops = await Job.find()
+
+        res.json({Employees, Jops})
     } catch (err) {
         res.status(500).send({error : err.message})
     }
@@ -13,7 +16,6 @@ export const getEmployee = async(req, res) => {
     try {
         const {id} = req.params
         const employee = await Employee.findById(id)
-        console.log(employee)
         res.status(200).json(employee)
     } catch (err) {
         res.status(500).send({error : err.message})
@@ -68,8 +70,6 @@ export const EditEmployee = async(req, res) => {
         const { id } = req.params
         var employeeCode = req.body.employeeCode
         const {employeeName, salaryStatus, dateOfHiring, jobCode} = req.body
-
-        // Update Product Info
 
         if(!employeeCode) {
             const lastEmployee = await Employee.findOne({}).sort({_id: -1})
