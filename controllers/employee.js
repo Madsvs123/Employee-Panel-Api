@@ -35,7 +35,7 @@ export const addEmployee = async(req, res) => {
             // Check The Exisiting OF employee code
 
             if(!employeeCode) {
-                const lastEmployee = await Employee.findOne({}).sort({_id: -1})
+                const lastEmployee = await Employee.findOne({}).sort({employeeCode: -1})
                 employeeCode = lastEmployee.employeeCode + 1
             }
 
@@ -72,7 +72,7 @@ export const EditEmployee = async(req, res) => {
         const {employeeName, salaryStatus, dateOfHiring, jobCode} = req.body
 
         if(!employeeCode) {
-            const lastEmployee = await Employee.findOne({}).sort({_id: -1})
+            const lastEmployee = await Employee.findOne({}).sort({employeeCode: -1})
             employeeCode = lastEmployee.employeeCode + 1
         }
 
