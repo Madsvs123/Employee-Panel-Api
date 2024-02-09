@@ -34,7 +34,7 @@ app.use(cors())
 app.use('/auth', authRoute)
 app.use('/user', userRoute)
 app.use('/employee', EmployeeRoute)
-app.use('/jop', JopRoute)
+app.use('/job', JopRoute)
 
 connectDB()
 app.listen(PORT, (err) => {
