@@ -17,7 +17,7 @@ export const authLogin = async (req, res) => {
             return res.status(500).json({error : `Wrong username Or password`})
         }
         const token = jwt.sign({id : user._id}, process.env.SECRET_TOKEN)
-        res.status(200).json({user : user, token : token})
+        res.status(200).json({username : user.username, token : token})
     } catch (err) {
         res.status(200).json({error : err.message})
     }
