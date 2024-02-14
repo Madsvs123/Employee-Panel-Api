@@ -3,7 +3,11 @@ import Job from '../models/Jop.js'
 
 export const getEmployees = async(req, res) => {
     try {
-        const employees = await Employee.find()
+        const employees = await Employee.find().populate({
+            path: 'jobCode',
+            select: 'code'
+          })
+
         const jobs = await Job.find()
 
         res.json({employees, jobs})
@@ -15,7 +19,11 @@ export const getEmployees = async(req, res) => {
 export const getEmployee = async(req, res) => {
     try {
         const {id} = req.params
-        const employee = await Employee.findById(id)
+        const employee = await Employee.findById(id).populate({
+            path: 'jobCode',
+            select: 'code'
+          })
+          
         res.status(200).json(employee)
     } catch (err) {
         res.status(500).send({error : err.message})
