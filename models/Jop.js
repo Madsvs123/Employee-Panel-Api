@@ -5,6 +5,11 @@ const jopSchema = new mongoose.Schema({
         type : String,
         required: true
     }, 
+    code : {
+        type : String,
+        required: true,
+        unique : true
+    },
     description : {
         type : String,
     },

@@ -24,8 +24,7 @@ export const getEmployee = async(req, res) => {
 
 export const addEmployee = async(req, res) => {
     try {
-        var employeeCode = req.body.employeeCode
-        const {employeeName, salaryStatus, dateOfHiring, jobCode} = req.body
+        var {employeeCode, employeeName, salaryStatus, dateOfHiring, jobCode} = req.body
         const employeeExist = await Employee.findOne({employeeCode})
 
         // Check The Existing Of Employee
@@ -39,7 +38,12 @@ export const addEmployee = async(req, res) => {
                 employeeCode = lastEmployee.employeeCode + 1
             }
 
+            employeeName = employeeName.replace(/\b\w/g, function(char) {
+                return char.toUpperCase();
+              });
+
             // Add New Employee
+
 
             const employee = new Employee({
                 employeeCode: employeeCode,
@@ -49,7 +53,7 @@ export const addEmployee = async(req, res) => {
                 jobCode : jobCode
             })
 
-            const newEmployee = await employee.save()
+            await employee.save()
             return res.status(200).json({message : `Employee ${employeeName} added successfully`})
         }
 
@@ -68,13 +72,16 @@ export const EditEmployee = async(req, res) => {
 
     try {
         const { id } = req.params
-        var employeeCode = req.body.employeeCode
-        const {employeeName, salaryStatus, dateOfHiring, jobCode} = req.body
+        var {employeeCode, employeeName, salaryStatus, dateOfHiring, jobCode} = req.body
 
         if(!employeeCode) {
             const lastEmployee = await Employee.findOne({}).sort({employeeCode: -1})
             employeeCode = lastEmployee.employeeCode + 1
         }
+
+        employeeName = employeeName.replace(/\b\w/g, function(char) {
+            return char.toUpperCase();
+          });
 
         const updateEmployee = await Employee.findByIdAndUpdate(id, {
             employeeCode,

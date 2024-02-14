@@ -25,13 +25,14 @@ export const getJop = async (req, res) => {
 
 export const addJop = async (req, res) => {
     try {
-        const {title, description, salary} = req.body;
-        const jopExist = await Jop.findOne({title})
+        const {code, title, description, salary} = req.body;
+        const jopExist = await Jop.findOne({code})
         if(jopExist) {
             return res.status(400).json({message : 'Jop already exists'})
         }
         
         const jop = new Jop({
+            code,
             title,
             description,
             salary
@@ -53,9 +54,10 @@ export const editJop = async(req, res) => {
 
     try {
         const { id } = req.params
-        const {title, description, salary} = req.body
+        const {code, title, description, salary} = req.body
 
         const updateJop = await Jop.findByIdAndUpdate(id, {
+            code,
             title,
             description,
             salary
