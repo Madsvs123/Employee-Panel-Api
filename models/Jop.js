@@ -1,24 +1,27 @@
 import mongoose from "mongoose";
 
-const jopSchema = new mongoose.Schema({
-    title : {
-        type : String,
-        required: true
-    }, 
-    code : {
-        type : String,
-        required: true,
-        unique : true
+const jopSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
     },
-    description : {
-        type : String,
+    code: {
+      type: String,
+      required: true,
+      unique: true,
     },
-    salary : {
-        type : Number,
-        required: true
-    }
-  }, {timestamps : true});
-  
-  const Jop = mongoose.model('jop', jopSchema);
-  
-  export default Jop
+    description: {
+      type: String,
+    },
+    salary: {
+      type: Number,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
+
+const Jop = mongoose.model("jop", jopSchema);
+
+export default Jop;
